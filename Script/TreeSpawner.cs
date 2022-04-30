@@ -100,5 +100,23 @@ public class TreeSpawner : MonoBehaviour
 
     }
 
+        private void enemysSetup()
+    {
+        while (numenemeys <= enemysNumLimitation) {
+            int aRandomTile = Random.Range(0, grassTileCount);
+            if(grassTileHasEmptySlot[aRandomTile] && numenemeys <= enemysNumLimitation)
+            {
+                 Vector3 spawnPos = grassTileWorldPos[aRandomTile];
+                int aRandomEne = Random.Range(0, enemysCount);
+                GameObject spawEne = enemys[aRandomEne];
+                Instantiate(spawEne, spawnPos , Quaternion.identity);
+
+                grassTileHasEmptySlot[aRandomTile] = false;
+
+                numenemeys++;
+            }
+        }
+    }
+
 
 }
