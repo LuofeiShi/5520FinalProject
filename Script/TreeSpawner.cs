@@ -118,5 +118,28 @@ public class TreeSpawner : MonoBehaviour
         }
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        spawnTimer -= Time.deltaTime;
+        if(spawnTimer < 0f)
+        {
+            if (numitems <= itemsNumLimitation) {
+                int aRandomTile = Random.Range(0, grassTileCount);
+                if(grassTileHasEmptySlot[aRandomTile] && numitems <= itemsNumLimitation)
+                {
+                    Vector3 spawnPos = grassTileWorldPos[aRandomTile];
+                    int aRandomItems = Random.Range(0, itemsCount);
+                    GameObject spawItems = items[aRandomItems];
+                    Instantiate(spawItems, spawnPos , Quaternion.identity); // qu..代表没有旋转
+                    spawnTimer = spawDelay;
 
+                    grassTileHasEmptySlot[aRandomTile] = false;
+                    numitems ++;
+                }
+            }
+
+        }
+
+    }
 }
