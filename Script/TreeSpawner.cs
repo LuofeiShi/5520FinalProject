@@ -78,4 +78,27 @@ public class TreeSpawner : MonoBehaviour
         treeSetup();
         enemysSetup();
     }
+
+    private void treeSetup()
+    {
+        while (numTree <= treeNumLimitation) {
+            //randomly chose an element
+            int aRandomTile = Random.Range(0, grassTileCount);
+            if(grassTileHasEmptySlot[aRandomTile] && numTree <= treeNumLimitation)
+            {
+                 Vector3 spawnPos = grassTileWorldPos[aRandomTile];
+                int aRandomRes = Random.Range(0, resourcesCount);
+                GameObject spawRes = resources[aRandomRes];
+
+                Instantiate(spawRes, spawnPos , Quaternion.identity);
+
+                grassTileHasEmptySlot[aRandomTile] = false;
+
+                numTree++;
+            }
+        }
+
+    }
+
+
 }
